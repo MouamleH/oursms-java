@@ -1,5 +1,5 @@
 
-package me.mouamle.oursms.retrofit.model.reqeust;
+package me.mouamle.oursms.retrofit.model.request;
 
 import com.google.gson.annotations.Expose;
 

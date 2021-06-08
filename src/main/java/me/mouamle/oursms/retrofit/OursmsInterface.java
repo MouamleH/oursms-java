@@ -1,7 +1,7 @@
 package me.mouamle.oursms.retrofit;
 
-import me.mouamle.oursms.retrofit.model.reqeust.OTPMessageRequest;
-import me.mouamle.oursms.retrofit.model.reqeust.OneMessageRequest;
+import me.mouamle.oursms.retrofit.model.request.OTPMessageRequest;
+import me.mouamle.oursms.retrofit.model.request.OneMessageRequest;
 import me.mouamle.oursms.retrofit.model.response.MessageStatus;
 import me.mouamle.oursms.retrofit.model.response.SMSResponse;
 import me.mouamle.oursms.retrofit.model.response.SentMessageData;
