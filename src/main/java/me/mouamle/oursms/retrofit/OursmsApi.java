@@ -15,8 +15,7 @@ import retrofit2.http.Path;
 
 import java.util.List;
 
-public interface OursmsInterface {
-
+public interface OursmsApi {
 
     @POST("v1/SMS/Add/SendOneSms")
     Call<SMSResponse<SentMessageData>> sendOneSms(@Body OneMessageRequest request);
@@ -27,13 +26,12 @@ public interface OursmsInterface {
     @GET("v1/SMS/Get/GetStatus/{message_id}")
     Call<SMSResponse<List<MessageStatus>>> getMessageStatus(@Path("message_id") String messageId);
 
-
-    static OursmsInterface getInstance() {
+    static OursmsApi getInstance() {
         return new Retrofit.Builder()
                 .baseUrl(ApiConstants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
-                .create(OursmsInterface.class);
+                .create(OursmsApi.class);
     }
 
 }
