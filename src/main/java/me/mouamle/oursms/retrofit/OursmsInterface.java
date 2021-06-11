@@ -6,6 +6,8 @@ import me.mouamle.oursms.retrofit.model.response.MessageStatus;
 import me.mouamle.oursms.retrofit.model.response.SMSResponse;
 import me.mouamle.oursms.retrofit.model.response.SentMessageData;
 import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -15,7 +17,6 @@ import java.util.List;
 
 public interface OursmsInterface {
 
-    String BASE_URL = "https://oursms.app/api/";
 
     @POST("v1/SMS/Add/SendOneSms")
     Call<SMSResponse<SentMessageData>> sendOneSms(@Body OneMessageRequest request);
@@ -25,5 +26,14 @@ public interface OursmsInterface {
 
     @GET("v1/SMS/Get/GetStatus/{message_id}")
     Call<SMSResponse<List<MessageStatus>>> getMessageStatus(@Path("message_id") String messageId);
+
+
+    static OursmsInterface getInstance() {
+        return new Retrofit.Builder()
+                .baseUrl(ApiConstants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(OursmsInterface.class);
+    }
 
 }

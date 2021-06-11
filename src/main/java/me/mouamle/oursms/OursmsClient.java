@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -36,11 +34,7 @@ public class OursmsClient {
         this.userId = userId;
         this.key = Objects.requireNonNull(key);
 
-        oursmsInterface = new Retrofit.Builder()
-                .baseUrl(OursmsInterface.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(OursmsInterface.class);
+        oursmsInterface = OursmsInterface.getInstance();
     }
 
     /**
