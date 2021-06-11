@@ -1,6 +1,6 @@
 package me.mouamle.oursms;
 
-import me.mouamle.oursms.retrofit.OursmsInterface;
+import me.mouamle.oursms.retrofit.OursmsApi;
 import me.mouamle.oursms.retrofit.model.request.OTPMessageRequest;
 import me.mouamle.oursms.retrofit.model.request.OneMessageRequest;
 import me.mouamle.oursms.retrofit.model.response.MessageStatus;
@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import retrofit2.Call;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -24,9 +22,7 @@ public class OursmsClient {
 
     private final long userId;
     private final String key;
-
-
-    private final OursmsInterface oursmsInterface;
+    private final OursmsApi oursmsApi;
 
     /**
      * @param userId the user id obtained from your profile page
@@ -35,12 +31,7 @@ public class OursmsClient {
     public OursmsClient(long userId, String key) {
         this.userId = userId;
         this.key = Objects.requireNonNull(key);
-
-        oursmsInterface = new Retrofit.Builder()
-                .baseUrl(OursmsInterface.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(OursmsInterface.class);
+        this.oursmsApi = OursmsApi.getInstance();
     }
 
     /**
@@ -51,7 +42,7 @@ public class OursmsClient {
      */
     public Optional<SentMessageData> sendOneMessage(String mobile, String message) throws IOException {
         final OneMessageRequest request = new OneMessageRequest(key, userId, mobile, message);
-        final Call<SMSResponse<SentMessageData>> call = oursmsInterface.sendOneSms(request);
+        final Call<SMSResponse<SentMessageData>> call = oursmsApi.sendOneSms(request);
         return executeMessageCall(call);
     }
 
@@ -63,7 +54,7 @@ public class OursmsClient {
      */
     public Optional<SentMessageData> sendOTP(String mobile, int otp) throws IOException {
         final OTPMessageRequest request = new OTPMessageRequest(key, userId, mobile, String.valueOf(otp));
-        final Call<SMSResponse<SentMessageData>> call = oursmsInterface.sendOTP(request);
+        final Call<SMSResponse<SentMessageData>> call = oursmsApi.sendOTP(request);
         return executeMessageCall(call);
     }
 
@@ -73,7 +64,7 @@ public class OursmsClient {
      * @throws IOException in case the request could not be sent due to an IO Error
      */
     public List<MessageStatus> getMessageStatus(String messageId) throws IOException {
-        final Call<SMSResponse<List<MessageStatus>>> call = oursmsInterface.getMessageStatus(messageId);
+        final Call<SMSResponse<List<MessageStatus>>> call = oursmsApi.getMessageStatus(messageId);
 
         final Response<SMSResponse<List<MessageStatus>>> response = call.execute();
         if (!response.isSuccessful()) {
