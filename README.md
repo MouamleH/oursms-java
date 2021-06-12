@@ -23,7 +23,7 @@ or directly from here
     <dependency>
         <groupId>com.github.MouamleH</groupId>
         <artifactId>oursms-java</artifactId>
-        <version>0.0.2</version>
+        <version>0.0.3</version>
     </dependency>
 </dependencies>
 ```
