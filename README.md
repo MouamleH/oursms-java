@@ -2,7 +2,7 @@
 
 # oursms java
 
-http://oursms.app client library
+[oursms.app](http://oursms.app) client library
 
 ## Installation 
 
