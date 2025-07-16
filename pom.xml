@@ -28,12 +28,12 @@
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
-            <version>2.9.0</version>
+            <version>3.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-gson</artifactId>
-            <version>2.9.0</version>
+            <version>3.0.0</version>
         </dependency>
         <!-- Retrofit -->
 
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.0-alpha1</version>
+            <version>2.0.0</version>
         </dependency>
         <!-- Logging -->
     </dependencies>
